@@ -65,7 +65,7 @@ const SpotifyUserInfo = ( {setInvalid, children} ) => {
         <UserSettings show={showS} setShow={setShowS} user={userInfo} />
         <Navbar expand="lg" className="navbar-body w-100" data-bs-theme="dark">
             <Container>
-                <Navbar.Brand className='spotify-font' href="#home">GigTag</Navbar.Brand>
+                <Navbar.Brand className='spotify-font' href="/">GigTag</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
