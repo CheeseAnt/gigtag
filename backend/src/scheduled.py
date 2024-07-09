@@ -9,7 +9,8 @@ def do_regular_ticket_check():
             ticketmaster.update_event_ticket_availability()
             telegram.send_notifications_for_tickets()
             print("Finished sending notifications")
-        except:
+        except Exception as ex:
+            print("Exception while sending notification:", ex)
             pass
 
         # sleep for 5 minutes
@@ -21,5 +22,3 @@ async def start():
     threading.Thread(target=do_regular_ticket_check, daemon=True).start()
     print("Started Telegram Inventory Thread")
     
-
-
