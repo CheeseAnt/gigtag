@@ -5,6 +5,7 @@
     background-color: antiquewhite;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    height: unset!important;
 }
 
 .burgerMenu {
