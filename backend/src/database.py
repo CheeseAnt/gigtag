@@ -639,6 +639,9 @@ def get_notification_events():
             
             if not enabled:
                 continue
+
+            # real dict row is trew
+            event = dict(event)
             event.update(enabled)
             events.append(event)
 

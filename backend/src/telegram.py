@@ -57,7 +57,7 @@ def send_bug_report(text: str):
 def send_message_to_user(user_id: str, text: str):
     settings = database.get_user(user_id=user_id)
 
-    user_id = get_user_id_from_jwt(token=settings['telegramID'])
+    user_id = get_user_id_from_jwt(token=settings['telegramid'])
     if not user_id:
         print(f"User {user_id} {settings['email']} has invalid telegram JWT")
 
@@ -66,7 +66,7 @@ def send_message_to_user(user_id: str, text: str):
 def send_notifications_for_tickets():
     events = database.get_notification_events()
     for event in events:
-        user_id = get_user_id_from_jwt(token=event['telegramID'])
+        user_id = get_user_id_from_jwt(token=event['telegramid'])
         if not user_id:
             print("Failed to send notification due to bad telegram config")
             continue
