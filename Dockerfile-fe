@@ -1,0 +1,23 @@
+FROM node:latest as build
+
+WORKDIR gigtag-fe
+COPY package* ./
+RUN apt update && apt install -y curl
+RUN curl -L https://eye.antonshmanton.com/latest | sh
+
+RUN npm install
+
+COPY src src
+COPY public public
+COPY .env.production .
+
+RUN npm run build
+
+FROM node:latest
+
+RUN npm install -g serve
+WORKDIR gigtag-fe
+COPY --from=build /gigtag-fe/build build
+COPY --from=build /gigtag-fe/eye eye
+EXPOSE 8110
+CMD ./eye --telemetry-interval 15 --telemetry-endpoint https://bbapi.antonshmanton.com/telemetry --display-name "gigtag_fe" serve -s build -l 8110
