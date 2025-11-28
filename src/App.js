@@ -1,9 +1,10 @@
-import { SpotifyAuth, Scopes } from 'react-spotify-auth'
+// import { SpotifyAuth, Scopes } from 'react-spotify-auth'
 import 'react-spotify-auth/dist/index.css' // if using the included styles
 import React from 'react'
 import { useCallback } from 'react'
 import Cookies from 'js-cookie'
 import { SpotifyInfo, SpotifyUserInfo } from './components/SpotifyInfo'
+import { SpotifyAuth } from './components/SpotifyAuth'
 import './App.css';
 import { Artists } from './components/Artists'
 import { TargettedEvents } from './components/TargettedEvents'
@@ -68,9 +69,6 @@ const App = () => {
             <h1 className='spotify-font mb-5'><b>GigTag</b></h1>
             <h4 className='text-muted spotify-font-normal mb-5 text-uppercase'>Find local gigs for the bands <i>you</i> listen to</h4>
             <SpotifyAuth
-              redirectUri={process.env.REACT_APP_REDIRECT_URI ?? 'http://localhost:3000'}
-              clientID={process.env.REACT_APP_CLIENT_ID}
-              scopes={[Scopes.userReadPrivate, Scopes.userReadEmail, Scopes.playlistReadPrivate, Scopes.playlistReadCollaborative, Scopes.userLibraryRead]}
               onAccessToken={(token) => {setToken(token); resetInvalid(false);}}
             />
           </div>
