@@ -202,10 +202,19 @@ def _start():
             resolve_new_artists(api=api)
             print("Getting events")
             get_artist_events(api=api)
-            print("Deleting old events")
-            database.delete_passed_events()
         except Exception as ex:
             print(f"Hit problem: {ex} while scheduled pulling")
             pass
+
+        sleep_until("15:30")
+
+def _start_deleter():
+    while True:
+        try:
+            print("Deleting old events")
+            database.delete_passed_events()
+        except Exception as ex:
+            print(f"Hit problem: {ex} while deleting old events")
+            pass        
 
         sleep_until("15:30")
