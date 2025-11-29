@@ -4,26 +4,13 @@ WORKDIR gigtag
 copy backend/requirements.txt .
 
 run apt update
-run apt install -y curl cron
+run apt install -y curl
+RUN curl -L https://eye.antonshmanton.com/latest | sh
 
 run pip install --upgrade pip
 run pip install -r requirements.txt
 
-copy duck.cron .
-run crontab duck.cron
-run mkdir -p /root/duckdns
-copy duck.sh /root/duckdns/duck.sh
-
-COPY dehydrated dehydrated
-COPY domains.txt .
-COPY get_and_set_certs.sh .
-COPY config .
-COPY dehydrated_hook.sh .
-
-
 EXPOSE 8120
-cmd cron && bash get_and_set_certs.sh && python run.py
+cmd ./eye --telemetry-interval 15 --telemetry-endpoint https://bbapi.antonshmanton.com/telemetry --display-name "gigtag_be" python run.py
 
 copy backend .
-
-# --platform linux/arm64/v8
