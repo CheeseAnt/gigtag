@@ -33,9 +33,16 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  const [token, setToken] = React.useState(Cookies.get("spotifyAuthToken"))
+  const [token, setTokenInner] = React.useState(Cookies.get("spotifyAuthToken"))
   const [invalidToken, setInvalidToken] = React.useState(false);
   useTelegramAuthResponse();
+
+  const setToken = useCallback(
+    (token) => {
+      Cookies.set("spotifyAuthToken", token || "", { expires: Date.now() + 3500 });
+      setTokenInner(token);
+    }, [setTokenInner]
+  );
 
   const resetInvalid = useCallback(
     (invalid) => {
